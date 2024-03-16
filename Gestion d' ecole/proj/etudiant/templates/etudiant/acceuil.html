@@ -1,0 +1,98 @@
+{% extends 'main.html'%}
+
+{% block contenu %}
+
+
+<!-- <form action="" method="POST">
+
+ 
+  
+</form> -->
+<div class="row">
+  
+    <div class="col-sm-4">
+      <h5 class="alert  alert-info">Ajouter un Nouveau Etudiant</h5>
+        <form action="" method="POST">
+          {%csrf_token%}
+          {{form.as_p}}
+           
+            <input type="submit" class="btn btn-success" value="Ajouter">
+        
+        </form>
+    </div>
+    <div class="col-sm-7 offset-1">
+      
+        <h5 class="text-center  alert alert-info">
+          <form action="{% url "accueil" %}" method="get">
+            <input type="text" class="form-controle me-2" placeholder="Search" aria-label="Search" name="q">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+            les information de l'etudiant</h5>
+        </form>
+        {% if stu %}
+        
+        <table class="table table-hover">
+            <thead>
+              
+              <tr>
+                {% comment %} <th scope="col">ID</th> {% endcomment %}
+                <th scope="col">Code</th>
+                <th scope="col">Nome</th>
+                <th scope="col">prenom</th>
+                <th scope="col">N_Telephone</th>
+                <th scope="col">Classe</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+               {% for st in stu%}
+              <tr>
+                {% comment %} <td>{{st.id}}</td> {% endcomment %}
+                <td>{{st.code}}</td>
+                <td>{{st.name}}</td>
+                <td>{{st.prenom}}</td>
+                <td>{{st.N_Tel}}</td>
+                <td>{{st.classe}}</td>
+                <td>
+
+                  <a href="{% url 'modifieretudient' st.id %}" class="btn btn-warning btn-sm">Modifier</a>
+                  <form action="{% url 'suprimeretudient' st.id %}" 
+                      method="post" class="d-inline" >
+                      {%csrf_token%}
+                     <input type="submit"  value="Supprimer" class="btn btn-danger" >
+                  </form>
+                  </td>
+                </tr>
+              {% endfor %}
+              
+            </tbody>
+          </table>
+
+          <!-- <p href="">Nombre de page:{{venues.paginator.num_pages}}</p><br/> -->
+          {% comment %} Page:{{venues}} <br>
+          Has previous:{{venues.has_previous}}<br/>
+          Has Next:{{venues.has_next}}<br/>
+          Current Page:{{venues.number}}<br>
+          Number of page:{{venues.paginator.num_pages}} <br>
+          <hr><br>
+           {% if venues.has_previous %}
+          <a href="?page=1">&laquo First</a>
+          <a href="?page={{venues.previous_page_number}}">Previous</a>
+
+          {% endif %}
+          <br>
+          Page {{ venues.number }}of{{ venues.paginator.num_pages }}
+
+          {% if venues.hast_next%}
+            <a href="?page={{venues.next_page_number}}">Next</a>
+            <a href="?page={{venues.paginator.num_pages}}">Last &raquo </a>
+
+          {% endif%}  {% endcomment %}
+        <!-- {% else %}
+        <h4 class="text-center alert  alert-warning">pas d'enregistrement</h4>
+        {% endif %} -->
+       
+    </div
+</div>
+
+    
+    {% endblock %}

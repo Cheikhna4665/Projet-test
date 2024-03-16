@@ -1,0 +1,60 @@
+{% extends 'main.html'%}
+
+{% block contenu %}
+
+
+<div class="row">
+    <div class="col-sm-4">
+      <h4 class=" alert alert  alert-info">Ajouter  Nouveau Classe</h4>
+        <form action="" method="POST">
+
+            {%csrf_token %}
+            {{form.as_p}}
+            <input type="submit" class="btn btn-success" value="Ajouter">
+        
+        </form>
+    </div>
+    <div class="col-sm-6 offset-1">
+        <h5 class="text-center  alert alert-info">
+          <form action="{% url "classe" %}" method="get">
+            <input type="text" class="form-controle me-2" placeholder="Search" aria-label="Search" name="q">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+            les information des classe</h5>
+          </form>
+        
+        {%if cls%}
+        <table class="table table-hover">
+            <thead>
+              <tr>
+                {% comment %} <th scope="col">ID</th> {% endcomment %}
+                <th scope="col">Nome</th>
+            
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for cl in cls%}
+              <tr>
+                {% comment %} <th scope="row">{{cl.id}}</th> {% endcomment %}
+                <td>{{cl.name}}</td>
+                
+                <td>
+
+                  <a href="{% url 'updatedata' cl.id %}" class="btn btn-warning btn-sm">Modifier</a>
+                <form action="{% url 'deletedatac' cl.id%}" 
+                method="post" class="d-inline" >
+                {%csrf_token%}
+               <input type="submit"  value="Supprimer" class="btn btn-danger" >
+            </form>
+                </td>
+              </tr>
+            {%endfor %}
+            </tbody>
+          </table>
+        {% else %}
+        <h4 class="text-center alert  alert-warning">pas d'enregistrement</h4>
+        
+        {% endif %}
+    </div
+</div>
+    {% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'main.html'%}
+{% load static %}
+{% block contenu %}
+<style>
+  #bg {
+    background-image: url("../static/images/img.jpg");
+    height: 80vh;
+    width: 10000px;
+  }
+  
+</style>
+<h1 class="text-center">Bienvenue </h1>
+<div id="bg">
+{% comment %} <img src="{% static 'images/img.jpg' %}"  alt=""/> {% endcomment %}
+</div>
+
+    
+    {% endblock %}
